@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
+using App21072018.Web.Infrastructure.Extensions;
 
 namespace App21072018.Web
 {
@@ -30,7 +32,10 @@ namespace App21072018.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDomainServices();
 
+            services.AddAutoMapper();
+           
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

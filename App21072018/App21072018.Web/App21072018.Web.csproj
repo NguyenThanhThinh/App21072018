@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\App21072018.EntityFrameworkCore\App21072018.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\App21072018.Services\App21072018.Services.csproj" />
   </ItemGroup>
 
 </Project>

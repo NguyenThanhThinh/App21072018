@@ -1,5 +1,6 @@
 ﻿namespace App21072018.EntityFrameworkCore
 {
+    using App21072018.Core.Domains;
     using App21072018.EntityFrameworkCore.Mapping;
     using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,10 @@
         {
 
         }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder )
         {
