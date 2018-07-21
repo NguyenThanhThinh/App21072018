@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App21072018.Core", "App21072018.Core\App21072018.Core.csproj", "{FCE2646D-CAF6-4009-ABA9-4973E7B2CAE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App21072018.EntityFrameworkCore", "App21072018.EntityFrameworkCore\App21072018.EntityFrameworkCore.csproj", "{3A5752D3-6C20-442C-8B92-7CAA3503985B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App21072018.EntityFrameworkCore", "App21072018.EntityFrameworkCore\App21072018.EntityFrameworkCore.csproj", "{3A5752D3-6C20-442C-8B92-7CAA3503985B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App21072018.Web", "App21072018.Web\App21072018.Web.csproj", "{5C51E89E-3525-41B6-8790-1B5E56B9C83F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3A5752D3-6C20-442C-8B92-7CAA3503985B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A5752D3-6C20-442C-8B92-7CAA3503985B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A5752D3-6C20-442C-8B92-7CAA3503985B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C51E89E-3525-41B6-8790-1B5E56B9C83F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C51E89E-3525-41B6-8790-1B5E56B9C83F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C51E89E-3525-41B6-8790-1B5E56B9C83F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C51E89E-3525-41B6-8790-1B5E56B9C83F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
