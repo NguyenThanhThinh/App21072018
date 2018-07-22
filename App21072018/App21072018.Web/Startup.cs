@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using App21072018.Web.Infrastructure.Extensions;
+using App21072018.EntityFrameworkCore.Repositories;
 
 namespace App21072018.Web
 {
@@ -31,7 +32,8 @@ namespace App21072018.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            services.AddScoped(typeof(IAppRepository<>), typeof(AppRepository<>));
+            services.AddScoped(typeof(IAppRepository<,>), typeof(AppRepository<,>));
             services.AddDomainServices();
 
             services.AddAutoMapper();

@@ -20,6 +20,7 @@ namespace App21072018.Web.Controllers
 
         public IActionResult Index()
         {
+            //var result = categoryService.GetAll();
             return View();
         }
 

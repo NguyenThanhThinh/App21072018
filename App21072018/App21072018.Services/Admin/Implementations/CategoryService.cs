@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using App21072018.Core.Domains;
 using App21072018.EntityFrameworkCore;
+using App21072018.EntityFrameworkCore.Repositories;
 using App21072018.Services.Admin.Models.Categories;
 using AutoMapper.QueryableExtensions;
 
@@ -10,11 +12,11 @@ namespace App21072018.Services.Admin.Implementations
 {
     public class CategoryService : ICategoryService
     {
-        private readonly App21072018DbContext db;
+        private readonly IAppRepository<Category> appRepository;
 
-        public CategoryService(App21072018DbContext db)
+        public CategoryService(IAppRepository<Category> appRepository)
         {
-            this.db = db;
+            this.appRepository = appRepository;
         }
         public CategoryListServiceModel ById(int id)
         {
@@ -38,7 +40,7 @@ namespace App21072018.Services.Admin.Implementations
 
         public IEnumerable<CategoryListServiceModel> GetAll()
         {
-              return this.db.Categories
+              return this.appRepository.GetQuery()
                 .OrderBy(b => b.Name)
                 .ProjectTo<CategoryListServiceModel>()
                 .ToList();
