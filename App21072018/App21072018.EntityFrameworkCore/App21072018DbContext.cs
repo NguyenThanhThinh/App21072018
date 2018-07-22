@@ -1,10 +1,12 @@
 ﻿namespace App21072018.EntityFrameworkCore
 {
+    using App21072018.Core;
     using App21072018.Core.Domains;
     using App21072018.EntityFrameworkCore.Mapping;
     using Microsoft.EntityFrameworkCore;
+    using System.Threading.Tasks;
 
-    public class App21072018DbContext : DbContext
+    public class App21072018DbContext : DbContext, IUnitOfWork
     {
         public App21072018DbContext(DbContextOptions<App21072018DbContext> options):base(options)
         {
@@ -20,6 +22,16 @@
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CategoryMap());
             modelBuilder.ApplyConfiguration(new ProductMap());
+        }
+
+        public async Task CommitAsync()
+        {
+            await base.SaveChangesAsync();
+        }
+
+        public void Commit()
+        {
+            base.SaveChanges();
         }
     }
 }
