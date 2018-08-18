@@ -10,6 +10,9 @@ using AutoMapper;
 using App21072018.Web.Infrastructure.Extensions;
 using App21072018.EntityFrameworkCore.Repositories;
 using App21072018.Services.Mapping;
+using NLog;
+using System;
+using System.IO;
 
 namespace App21072018.Web
 {
@@ -17,6 +20,8 @@ namespace App21072018.Web
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+
             Configuration = configuration;
         }
 
@@ -65,7 +70,7 @@ namespace App21072018.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.ConfigureCustomExceptionMiddleware();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
