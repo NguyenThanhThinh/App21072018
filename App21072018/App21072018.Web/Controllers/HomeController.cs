@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using App21072018.Web.Models;
 using App21072018.Services.Admin;
+using App21072018.Services;
 
 namespace App21072018.Web.Controllers
 {
@@ -13,14 +14,20 @@ namespace App21072018.Web.Controllers
     {
         private readonly ICategoryService categoryService;
 
-        public HomeController(ICategoryService categoryService)
+        private readonly ILoggerService logger;
+
+        public HomeController(ICategoryService categoryService,ILoggerService logger)
         {
             this.categoryService = categoryService;
+
+            this.logger = logger;
         }
 
         public IActionResult Index()
         {
-            //var result = categoryService.GetAll();
+            var result = categoryService.GetAll();
+            logger.LogInfo($"true");
+            
             return View();
         }
 
