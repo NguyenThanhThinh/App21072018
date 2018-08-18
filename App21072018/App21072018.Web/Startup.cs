@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using App21072018.Web.Infrastructure.Extensions;
 using App21072018.EntityFrameworkCore.Repositories;
+using App21072018.Services.Mapping;
 
 namespace App21072018.Web
 {
@@ -37,7 +38,14 @@ namespace App21072018.Web
             services.AddDomainServices();
 
             services.AddAutoMapper();
-           
+            var configMapper = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new CategoryMapProfile());
+               
+            });
+            var mapper = configMapper.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

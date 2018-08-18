@@ -1,7 +1,7 @@
-﻿using App21072018.Services.Admin.Models.Categories;
-using System;
+﻿using App21072018.Core.Domains;
+using App21072018.Services.Admin.Models.Categories;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace App21072018.Services.Admin
 {
@@ -10,14 +10,14 @@ namespace App21072018.Services.Admin
        
         IEnumerable<CategoryListServiceModel> GetAll();
 
-        void Create(string name, string description);
+        Task Create(CategoryListServiceModel model);
 
         int Total();
 
-        CategoryListServiceModel ById(int id);
+        Task<CategoryListServiceModel> ById(int id);
 
-        bool Edit(string name, string description);
+        bool Edit(CategoryListServiceModel model);
 
-        bool Delete(int id);
+        bool Delete(Category id);
     }
 }

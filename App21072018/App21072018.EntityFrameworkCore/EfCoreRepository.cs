@@ -1,6 +1,9 @@
 ﻿using App21072018.Core;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace App21072018.EntityFrameworkCore
@@ -35,11 +38,21 @@ namespace App21072018.EntityFrameworkCore
             return entity;
         }
 
-        public TEntity Update(TEntity entity)
+        public TEntity Update(TEntity entity, List<Expression<Func<TEntity, object>>> updateProperties = null, List<Expression<Func<TEntity, object>>> excludeProperties = null)
         {
-            if (entity != null)
+            _dbSet.Attach(entity);
+
+            if (updateProperties == null || updateProperties.Count == 0)
             {
-                _dbContext.Entry(entity).State = EntityState.Modified;
+                _dbContext.Entry<TEntity>(entity).State = EntityState.Modified;
+                if (excludeProperties != null && excludeProperties.Count > 0)
+                {
+                    excludeProperties.ForEach(p => _dbContext.Entry<TEntity>(entity).Property(p).IsModified = false);
+                }
+            }
+            else
+            {
+                updateProperties.ForEach(p => _dbContext.Entry<TEntity>(entity).Property(p).IsModified = true);
             }
 
             return entity;

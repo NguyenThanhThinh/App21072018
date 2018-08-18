@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using App21072018.Core;
 using App21072018.Core.Domains;
 using App21072018.EntityFrameworkCore;
 using App21072018.EntityFrameworkCore.Repositories;
 using App21072018.Services.Admin.Models.Categories;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace App21072018.Services.Admin.Implementations
 {
@@ -18,37 +22,62 @@ namespace App21072018.Services.Admin.Implementations
         {
             this.appRepository = appRepository;
         }
-        public CategoryListServiceModel ById(int id)
+        public async Task<CategoryListServiceModel> ById(int id)
         {
-            throw new NotImplementedException();
+            var category = await appRepository.GetByIdAsync(id);
+
+            var categoryDto = new CategoryListServiceModel();
+
+            if (category != null)
+            {
+                categoryDto = Mapper.Map<Category, CategoryListServiceModel>(category);
+
+                return categoryDto;
+            }
+
+            return categoryDto;
         }
 
-        public void Create(string name, string description)
+        public async Task Create(CategoryListServiceModel model)
         {
-            throw new NotImplementedException();
+            var category = Mapper.Map<CategoryListServiceModel, Category>(model);
+
+            await appRepository.InsertAsync(category);
+
+            await appRepository.UnitOfWork.CommitAsync();
         }
 
-        public bool Delete(int id)
+        public bool Delete(Category id)
         {
-            throw new NotImplementedException();
+            if (id != null)
+            {
+                appRepository.Delete(id);
+                return true;
+            }
+            return false;
         }
 
-        public bool Edit(string name, string description)
+        public bool Edit(CategoryListServiceModel model)
         {
-            throw new NotImplementedException();
+          
+            var getCategory = Mapper.Map<CategoryListServiceModel,Category>(model);
+            appRepository.Update(getCategory);
+            appRepository.UnitOfWork.CommitAsync();
+            return true;
+
         }
 
         public IEnumerable<CategoryListServiceModel> GetAll()
         {
-              return this.appRepository.GetQuery()
-                .OrderBy(b => b.Name)
-                .ProjectTo<CategoryListServiceModel>()
-                .ToList();
+            return this.appRepository.GetQuery()
+              .OrderBy(b => b.Name)
+              .ProjectTo<CategoryListServiceModel>()
+              .ToList();
         }
 
         public int Total()
         {
-            throw new NotImplementedException();
+            return appRepository.GetQuery().Count();
         }
     }
 }
